@@ -10,7 +10,7 @@ import { Navbar } from './Navbar'
 export const AllRoutes = () => {
   return (
     <Routes>
-        <Route path='/' element={<Navbar/>}/>
+        {/* <Route path='/' element={<Navbar/>}/> */}
         <Route path='/all' element={<All/>}/>
         <Route path='/html' element={<Html/>} />
         <Route path='/css' element={<Css/>} />
