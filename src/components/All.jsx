@@ -4,24 +4,26 @@ import React, { useEffect, useState } from "react";
 export const All = () => {
   const [fetch, setFetch] = useState([]);
   const [page, setPage] = useState(1);
-  const limit = 10;
+  //   const limit = 10;
 
   useEffect(() => {
     axios
       .get(
-        `https://api.github.com/search/repositories?q=stars:%3E1+language:all?_page=${page}&_limit=${limit}`
+        `https://api.github.com/search/repositories?q=stars:%3E1+language:all?_page=${page}&_limit=10`
       )
       .then((res) => setFetch(res.data.items));
   }, [page]);
 
   //   const handelPageChanging = (page) => setPage(page)
+  console.log(page)
 
+  
   return (
     <div id="container">
       {fetch
         .sort((a, b) => b.stargazers_count - a.stargazers_count)
         .map((e) => (
-          <div className="box">
+          <div className="box" > <a href={e.owner.html_url}>
             <img id="avatar" src={e.owner.avatar_url} alt="" />
             <h3>{e.name}</h3>
             <h5>{e.language}</h5>
@@ -33,7 +35,9 @@ export const All = () => {
                 Fork counts
               </div>
             </div>
+            </a>
           </div>
+
         ))}
       <div>
         {/* <button disabled={page === 1} onClick={() => setPage(page - 1)}>
@@ -41,32 +45,11 @@ export const All = () => {
         </button>
         <button onClick={() => setPage(page + 1)}>NEXT</button> */}
 
-        <button
-          onClick={() => {
-            if (page == 1) {
-              setPage(page);
-            } else {
-              setPage(page - 1);
-            }
-          }}
-          disabled={page == 1}
-        //   colorScheme="blue"
-        >
+        <button onClick={() => {setPage(page-1)}} disabled={page == 1}>
           Prev
         </button>
 
-        <button
-          onClick={() => {
-            let totalpage = fetch.length + 1;
-            if (page > totalpage) {
-              return;
-            } else {
-              setPage(page + 1);
-            }
-          }}
-          disabled={page > fetch.length + 1}
-        //   colorScheme="blue"
-        >
+        <button onClick={() => {setPage(page+1)}} disabled={page > fetch.length + 1}>
           Next
         </button>
       </div>
