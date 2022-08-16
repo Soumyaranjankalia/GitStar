@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 export const All = () => {
   const [fetch, setFetch] = useState([]);
   const [page, setPage] = useState(1);
-  //   const limit = 10;
+  
 
   useEffect(() => {
     axios
@@ -23,7 +23,7 @@ export const All = () => {
       {fetch
         .sort((a, b) => b.stargazers_count - a.stargazers_count)
         .map((e) => (
-          <div className="box" > <a href={e.owner.html_url}>
+          <div className="box" key={e.id} > <a href={e.owner.html_url}>
             <img id="avatar" src={e.owner.avatar_url} alt="" />
             <h3>{e.name}</h3>
             <h5>{e.language}</h5>
@@ -40,11 +40,7 @@ export const All = () => {
 
         ))}
       <div>
-        {/* <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-          PREV
-        </button>
-        <button onClick={() => setPage(page + 1)}>NEXT</button> */}
-
+        
         <button onClick={() => {setPage(page-1)}} disabled={page == 1}>
           Prev
         </button>

@@ -17,7 +17,7 @@ export const Html = () => {
           {fetch
             .sort((a, b) => b.stargazers_count - a.stargazers_count)
             .map((e) => (
-              <div className="box" > <a href={e.owner.html_url}>
+              <div className="box" key={e.id} > <a href={e.owner.html_url}>
                 <img id="avatar" src={e.owner.avatar_url} alt="" />
                 <h3>{e.name}</h3>
                 <h5>{e.language}</h5>
